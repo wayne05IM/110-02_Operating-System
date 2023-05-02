@@ -1,0 +1,6 @@
+(1)
+There are two race conditions: "++number_of_processes" and "--number_of_processes". Multiple threads may do them at the same time and cause data inconsistency. 
+
+(2)
+In the first race condition, an "acquire(mutex)" must be placed at the row above "++number_of_processes", and a "release(mutex)" should be placed at the row after "return new_pid" in case the thread returns before it get mutex.
+In the second race condition, an "acquire(mutex)" must be placed at the row above "--number_of_processes", and a "release(mutex)" should be placed at the row after "--number_of_processes".
